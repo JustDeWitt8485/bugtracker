@@ -22,8 +22,6 @@ class AddTicket(forms.Form):
     title = forms.CharField(max_length=200)
     description = forms.TimeField()
 
-    
-
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)

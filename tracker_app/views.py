@@ -63,6 +63,3 @@ def ticket_detail(request, user_filed_id):
     return render(
         request, 'ticket_detail.html', {'ticket_d': ticket_det}
     )
-
-
-

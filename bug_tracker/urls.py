@@ -23,7 +23,7 @@ urlpatterns = [
     path('login/', views.login_view, name='loginpage'),
     path('logout/', views.logout_view, name='logoutpage'),
     path('tickets/add/', views.create_ticket, name='createtick'),
-    path('tickets/<int:user_filed_id>/', views.ticket_detail, name='ticket_detail'),
-    # path('accounts/', include('django.contrib.auth.urls')),
+    path('tickets/<int:user_filed_id>/', views.ticket_detail,
+         name='ticket_detail'),
     path('admin/', admin.site.urls),
 ]
