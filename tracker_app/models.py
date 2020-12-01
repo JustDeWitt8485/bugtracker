@@ -14,17 +14,17 @@ class CustUser(AbstractUser):
 
 
 class Tickets(models.Model):
-
     Status_Of_Tickets = [
-        ('NW', 'New'),
-        ('IP', 'In Progress'),
-        ('DN', 'Done'),
-        ('IV', 'Invalid'),
+        ('NEW', 'new'),
+        ('IN_PROGRESS', 'in_progress'),
+        ('DONE', 'done'),
+        ('INVALID', 'invalid'),
     ]
 
+    status = models.CharField(max_length=12, choices=Status_Of_Tickets, default='NEW')
     title = models.CharField(max_length=200)
     description = models.TextField()
     date_filed = models.DateTimeField(default=timezone.now)
-    user_assign = models.ForeignKey(CustUser, on_delete=models.CASCADE, related_name='user_ass')
-    user_filed = models.ForeignKey(CustUser, on_delete=models.CASCADE, related_name='user_fill')
-    user_complete = models.ForeignKey(CustUser, on_delete=models.CASCADE, related_name='user_complete')
+    user_filed = models.ForeignKey(CustUser, on_delete=models.CASCADE, related_name='user_filed', null=True)
+    user_assigned = models.ForeignKey(CustUser, on_delete=models.CASCADE, related_name='user_ass', null=True)
+    user_completed = models.ForeignKey(CustUser, on_delete=models.CASCADE, related_name='user_completed', null=True)

@@ -20,6 +20,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
             aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
+            <button><a href="/tickets/add/"class="text-body">Create Ticket</a></button>
             {% if request.user.is_authenticated %}
                 <button type="button" class="btn btn-outline-danger">
                     <a href="/logout/" class="text-body">Log Out</a></button>
@@ -45,13 +46,47 @@
 
             <br>
             <br>
+
             <ol>
+                    <h2>New Tickets</h2>
+
+                {% for n in new %}
+
+                    <h5><a href='/tickets/{{n.id}}'>{{n.title}}</a></h5>
+
+                {% endfor %}
             
-            {% for ticket in tickets %}
 
-                <h5><a href='/tickets/{{ticket.id}}'>{{ ticket.title }}</a></h5>
+            </ol>
 
-            {% endfor %}
+            <br>
+            <br>
+
+            <ol>
+                    <h2>In Progress</h2>
+            
+                {% for inpro in ip %}
+
+                    <h5><a href='/tickets/{{inpro.id}}'>{{inpro.title}}</a></h5>
+
+                {% endfor %}
+            
+
+            </ol>
+
+            <br>
+            <br>
+
+            <ol>
+
+                    <h2>Done</h2>
+            
+                {% for dn in done %}
+
+                    <h5><a href='/tickets/{{dn.id}}'>{{dn.title}}</a></h5>
+
+                {% endfor %}
+            
 
             </ol>
 
