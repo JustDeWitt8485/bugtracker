@@ -24,7 +24,7 @@ def index(request):
         'ip': in_pro,
         'done': done,
         'invalid': invalid
-        }
+    }
     )
 
 
@@ -38,7 +38,7 @@ def login_view(request):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next',
-                                            reverse('homepage')))
+                                                            reverse('homepage')))
     form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
@@ -58,7 +58,7 @@ def create_ticket(request):
             ticket = Tickets.objects.create(
                 title=data['title'],
                 description=data['description'],
-                )
+            )
             print(ticket.id)
             return HttpResponseRedirect(reverse('homepage'))
 
@@ -84,7 +84,17 @@ def ticket_detail(request, user_filed_id):
     ticket_det = Tickets.objects.get(id=user_filed_id)
     choose_person = ActionForm()
     return render(
-        request, 'ticket_detail.html', {'ticket_d': ticket_det, 'choose_person': choose_person }
+        request, 'ticket_detail.html', {
+            'ticket_d': ticket_det, 'choose_person': choose_person}
+    )
+
+
+def user_detail(request, user_id):
+    user = CustUser.objects.filter(id=user_id).first()
+    user_ticket = Tickets.objects.filter(user_filed=user)
+    return render(
+        request, 'user_detail.html', {
+            'user': user, 'user_ticket': user_ticket}
     )
 
 
@@ -105,30 +115,32 @@ def edit_ticket(request, ticket_id):
     return render(request, html, {'form': form})
 
 
-def assign_ticket(request, assign_id):
-
-    assign_ticket = Tickets.objects.status()
-
-    if assign_ticket in 'IN_PROGRESS':
-        request.user = None
-        assign_ticket.user_completed = None
-        assign_ticket.save()
+def assign_ticket(request, ticket_id):
+    ass_ticket = Tickets.objects.filter(id=ticket_id).first()
+    if ass_ticket.status == "IN_PROGRESS":
+        ass_ticket.user_assigned = request.user
+        ass_ticket.user_completed = None
+        ass_ticket.save()
     return HttpResponseRedirect(reverse('homepage'))
 
 
-
-        
-
-
-    
-# def upvote(request, post_id):
-#     post = Post.objects.filter(id=post_id).first()
-#     post.upvote += 1
-#     post.save()
-#     return redirect('/')
-
-# assign ticket to you: use Ticket.objects.status. ...check if it is in IN_PROGRESS
-# if it is in progress, = resquest.user, user completed will be assigned to none.
+def completed_ticket(request, ticket_id):
+    user = CustUser.objects.get(username=request.user.username)
+    ass_ticket = Tickets.objects.filter(id=ticket_id).first()
+    if ass_ticket.status == "INVALID" or ass_ticket.user_assigned is None:
+        ass_ticket.user_assigned = user
+        ass_ticket.user_completed = None
+    ass_ticket.status = "DONE"
+    ass_ticket.user_completed = ass_ticket.user_assigned
+    ass_ticket.user_assigned = None
+    ass_ticket.save()
+    return HttpResponseRedirect(reverse('homepage'))
 
 
-
+def return_ticket(request, ticket_id):
+    return_tick = Tickets.objects.filter(id=ticket_id).first()
+    return_tick.status = "NEW"
+    return_tick.user_assigned = None
+    return_tick.user_completed = None
+    return_tick.save()
+    return HttpResponseRedirect(reverse('homepage'))

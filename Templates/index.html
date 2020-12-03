@@ -21,6 +21,7 @@
             aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             <button><a href="/tickets/add/"class="text-body">Create Ticket</a></button>
+            <button><a href="/user/{{request.user.id}}"class="text-body">{{request.user}}'s Detail page</a></button>
             {% if request.user.is_authenticated %}
                 <button type="button" class="btn btn-outline-danger">
                     <a href="/logout/" class="text-body">Log Out</a></button>
