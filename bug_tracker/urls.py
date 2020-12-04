@@ -27,6 +27,11 @@ urlpatterns = [
     path('user/<int:user_id>/', views.user_detail, name='user_detail'),
     path('tickets/<int:user_filed_id>/', views.ticket_detail,
          name='ticket_detail'),
-    path('assignperson/<int:ticket_id>/', views.status_view, name='statusview'),
+    path('assign/<int:ticket_id/', views.assign_ticket, name='assign_ticket'),
+    path('complete/<int:ticket_id/', views.completed_ticket,
+         name='com_ticket'),
+    path('return/<int:ticket_id/', views.return_ticket, name='return_ticket'),
+    path('assignperson/<int:ticket_id>/', views.status_view,
+         name='statusview'),
     path('admin/', admin.site.urls),
 ]

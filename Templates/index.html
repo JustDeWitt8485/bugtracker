@@ -91,6 +91,22 @@
 
             </ol>
 
+            <br>
+            <br>
+
+            <ol>
+                    <h2>Invalid Tickets</h2>
+
+                    {% for i in invalid %}
+
+                        <h5><a href='/tickets/{{i.id}}'>{{i.title}}</a></h5>
+
+                    {% endfor %}
+            
+
+            </ol>
+            
+
 
 
 

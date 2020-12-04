@@ -52,28 +52,18 @@
 
         {% endfor %}
 
+        
+
+
+<h4>Completed Tickets</h4>
+
+        {% for user_t in user_ticket  %}
+
+            <h6>{{user_t.title}}</h6>
+
+        {% endfor %}
+
 <!-- has a user detail page where you can see:
 the current tickets assigned to a user
 which tickets that user has filed
 which tickets that user completed -->
-
-<!-- <br>
-<br>
-
-<h4><a href="/edit/{{ticket_d.id}}">EDIT</a></h4>
-
-<h4>Title:</h4><h6>-{{ ticket_d.title }}</h6>
-<br>
-<h4>Description:</h4><h6>-{{ ticket_d.description }}</h6>
-<br>
-<h4>Date Submitted:</h4><h6>-{{ ticket_d.date_filed }}</h6>
-<br>
-<h4>Reported By:</h4><h6>-{{ ticket_d.user_filed }}</h6> -->
-
-<!-- <form method="post" action="/assignperson/{{ticket_d.id}}/">
-    {% csrf_token %}
-    {{choose_person.as_p}}
-    <input type="submit" class="btn btn-success" value="Submit" />
-    </div>
-</form>
- --> 

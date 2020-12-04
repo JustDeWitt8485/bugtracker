@@ -15,7 +15,7 @@ def index(request):
     new_ticket = Tickets.objects.filter(status="NEW")
     in_pro = Tickets.objects.filter(status="IN_PROGRESS")
     done = Tickets.objects.filter(status="DONE")
-    invalid = Tickets.objects.filter(status="INVALID"),
+    invalid = Tickets.objects.filter(status="INVALID")
 
     return render(request, 'index.html', {
         'user': user,
@@ -23,7 +23,7 @@ def index(request):
         'new': new_ticket,
         'ip': in_pro,
         'done': done,
-        'invalid': invalid
+        'invalid': invalid,
     }
     )
 

@@ -41,6 +41,18 @@
 
 <h4><a href="/edit/{{ticket_d.id}}">EDIT</a></h4>
 
+<form method="post" action="/assignperson/{{ticket_d.id}}/">
+    <label for="status">Status:</label>
+    <select name= id=>
+        <option value={{new}}>New</option>
+        <option value={{ip}}>In Progress</option>
+        <option value={{done}}>Done</option>
+        <option value={{invalid}}>Invalid</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+
 <h4>Title:</h4><h6>-{{ ticket_d.title }}</h6>
 <br>
 <h4>Description:</h4><h6>-{{ ticket_d.description }}</h6>
@@ -52,7 +64,7 @@
 <form method="post" action="/assignperson/{{ticket_d.id}}/">
     {% csrf_token %}
     {{choose_person.as_p}}
-    <input type="submit" class="btn btn-success" value="Submit" />
+    <input type="submit" class="text-body" value="Submit" />
     </div>
 </form>
 
@@ -86,21 +98,6 @@ User who Completed: None -->
 
 {% endif %} -->
 
-<!-- {% if ticket.status is ip%}
-<form action="/tickets/{{ticket_d.id}}">
-    <label for="status">Status:</label>
-    <select name="status" id={{status}}>
-        <option value={{new}}>New</option>
-        <option value={{ip}}>In Progress</option>
-        <option value="{{done}}">Done</option>
-        <option value={{invalid}}>Invalid</option>
-    </select>
-    <br><br>
-    <input type="submit" value="Submit">
-</form>
-
-
-{% endif %} -->
 <!-- <h4>Status:</h4><h6>-{{ ticket_d.status }}</h6>
 <br>
 <h4>Title:</h4><h6>-{{ ticket_d.title }}</h6>
